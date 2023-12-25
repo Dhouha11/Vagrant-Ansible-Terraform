@@ -1,0 +1,61 @@
+---
+- name: Setup Terraform on New Ubuntu 22.04 System
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Update the APT Package Cache
+      become: true
+      apt:
+        update_cache: true
+    - name: Add the signing key
+      become: true
+      apt_key:
+        url: "https://apt.releases.hashicorp.com/gpg"
+        state: present
+    - name: Add the Hashicorp Repo to Ubuntu
+      become: true
+      apt_repository:
+        repo: "deb [arch=amd64] https://apt.releases.hashicorp.com jammy main"
+        state: present
+    - name: Install software from standard repos and hashicorp
+      become: true
+      apt:
+        name:
+          - docker.io
+          - gnupg
+          - software-properties-common
+          - curl
+          - terraform       
+    - name: create USER Vagrant
+      become: true
+      user:
+        name: vagrant
+        groups: docker
+        append: true
+    - name: Create the directory for terraform project
+      file:
+        path: "/home/vagrant/terraform/"
+        state: directory
+    - name: Create the web directory to store content
+      file:
+        path: "/home/vagrant/terraform/web"
+        state: directory
+    - name: Create the index page for the website
+      copy:
+        dest: "/home/vagrant/terraform/web/index.html"
+        content: This is my web page
+    # copy the main.tn to the virtual machine  
+    - name: We copy the main.tf terraform file to the VM
+      copy:
+        src: "main.tf"
+        dest: "/home/vagrant/terraform/main.tf"
+    # Execute terraform init
+    - name: This command will change the working directory to terraform dir/
+      ansible.builtin.shell:
+        cmd: terraform init
+        chdir: "/home/vagrant/terraform/"
+    # Execute terraform apply
+    - name: This command will change the working directory to terraform dir/
+      ansible.builtin.shell:
+        cmd: terraform apply
+        chdir: "/home/vagrant/terraform/"
