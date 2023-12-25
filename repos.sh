@@ -11,3 +11,5 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 # Install Vagrant version=2.3.4 on Ubuntu 22.04.3 LTS to prevent the compatibility problem with ansible
 sudo apt update && sudo apt install vagrant=2.3.4
 sudo apt-mark hold vagrant=2.3.4
+#Nested Virtualization
+set-VMProcessor -VMName Ubuntu-Vagrant -ExposeVirtualizationExtensions $true
