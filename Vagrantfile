@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "generic/ubuntu2204"
     config.vm.network "forwarded_port", guest: 80, host: 8080, id: "mycv"
+    config.vm.network "private_network", type: "dhcp"
     config.vm.synced_folder ".", "/vagrant_data", disabled: true
 
     # Define the number of virtual machines you want
