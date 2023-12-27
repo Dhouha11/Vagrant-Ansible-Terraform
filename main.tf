@@ -17,10 +17,14 @@ resource "docker_image" "mycv" {
 }
 
 resource "docker_container" "mycv" {
-  image = docker_image.mycv.latest
+  image = docker_image.mycv.name  # Use 'name' attribute, not '.latest'
   name  = "cv_dhouha"
-  ports {
-    internal = 80
-    external = 8080
+  
+  dynamic "ports" {
+    for_each = [1, 2]  # Adjust based on the number of ports you want
+    content {
+      internal = 80
+      external = 8080 + ports.key - 1
+    }
   }
 }
