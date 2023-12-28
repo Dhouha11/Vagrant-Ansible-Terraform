@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     (1..num_vm).each do |i|
       config.vm.define "vm#{i}" do |vm|
         vm.vm.box = "generic/ubuntu2204"
-        config.vm.network "forwarded_port", guest: 80, host: 8080 + i, id: "mycv_vm#{i}"
+        config.vm.network "forwarded_port", guest: 80, host: 808{i}, id: "mycv_vm#{i}"
         vm.vm.hostname = "dhouha#{i}"
     
         vm.vm.provider "virtualbox" do |vb|
