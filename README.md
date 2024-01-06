@@ -86,7 +86,7 @@ Each virtual machine is configured with the following settings:
     ```
       
 
-### Ansible Provisioning
+## 3. Ansible Provisioning
 
 Ansible is used for provisioning each virtual machine, and the playbook.yaml file is specified for configuration.
 # Ansible Playbook: Setup Terraform and Docker on Ubuntu 22.04
@@ -130,22 +130,10 @@ To use this Terraform setup, follow these steps:
 
 ### Prerequisites
 
-- [Terraform](https://www.terraform.io/downloads.html)
-- Docker installed on the target machine
+- Terraform installed on the machine running the playbook
+- Docker installed on the target machine via playbook.yml
 
-3. Edit the `main.tf` file if needed, adjusting the Docker image, container name, and port configurations.
-
-4. Initialize the Terraform configuration:
-
-    ```bash
-    terraform init
-    ```
-
-5. Apply the Terraform configuration:
-
-    ```bash
-    terraform apply
-    ```
+1. Edit the `main.tf` file if needed, adjusting the Docker image, container name, and port configurations.
 
 ## Configuration Details
 
