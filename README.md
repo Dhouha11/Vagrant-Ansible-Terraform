@@ -84,9 +84,8 @@ Each virtual machine is configured with the following settings:
     ```bash
     vagrant ssh
     ```
-      
 
-## 3. Ansible Provisioning
+## 3. Ansible Provisioning       
 
 Ansible is used for provisioning each virtual machine, and the playbook.yaml file is specified for configuration.
 # Ansible Playbook: Setup Terraform and Docker on Ubuntu 22.04
